@@ -1,5 +1,5 @@
 from pyfirmata import Arduino, util, Board, SERVO
-from pyfirmata import PWM, ANALOG, I2C_REQUEST
+from pyfirmata import PWM, ANALOG, I2C_REQUEST, INPUT
 from pyfirmata.boards import BOARDS
 
 import time

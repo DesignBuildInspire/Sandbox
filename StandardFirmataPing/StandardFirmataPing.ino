@@ -112,6 +112,7 @@ void wireWrite(byte data)
 #else
   Wire.send(data);
 #endif
+
 }
 
 byte wireRead(void)
