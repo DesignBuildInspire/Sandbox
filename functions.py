@@ -19,6 +19,7 @@ servo1.mode = SERVO
 servo2 = mbot.digital[12]
 servo2.mode = SERVO
 
+# this requires changing the Arduino dict board.py file in Pyfirmata to this 'digital': tuple(x for x in range(22)),
 servo3 = mbot.digital[15]
 servo3.mode = SERVO
 servo3.write(90)
