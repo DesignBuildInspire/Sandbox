@@ -9,9 +9,20 @@ import time
 
 board = Arduino("/dev/tty.usbserial-1430",baudrate=115200)
 
-
 iterator = util.Iterator(board)
 iterator.start()
+
+
+
+
+
+
+
+
+
+
+
+
 
 # print(board.get_firmata_version())
 def blinkled(count,delay=0.2):

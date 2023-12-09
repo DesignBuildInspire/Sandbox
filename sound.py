@@ -1,120 +1,51 @@
 from pyfirmata import Arduino, util, Board, SERVO
 from pyfirmata import PWM, ANALOG, I2C_REQUEST
 from pyfirmata.boards import BOARDS
+import serial.tools.list_ports
+from notes import *
 
 import time
 
 PING_READ = 0x75
 SET_TONE = 0x74
 
-NOTE_B0 = 31
-NOTE_C1 = 33
-NOTE_CS1 = 35
-NOTE_D1 = 37
-NOTE_DS1 = 39
-NOTE_E1 = 41
-NOTE_F1 = 44
-NOTE_FS1 = 46
-NOTE_G1 = 49
-NOTE_GS1 = 52
-NOTE_A1 = 55
-NOTE_AS1 = 58
-NOTE_B1 = 62
-NOTE_C2 = 65
-NOTE_CS2 = 69
-NOTE_D2 = 73
-NOTE_DS2 = 78
-NOTE_E2 = 82
-NOTE_F2 = 87
-NOTE_FS2 = 93
-NOTE_G2 = 98
-NOTE_GS2 = 104
-NOTE_A2 = 110
-NOTE_AS2 = 117
-NOTE_B2 = 123
-NOTE_C3 = 131
-NOTE_CS3 = 139
-NOTE_D3 = 147
-NOTE_DS3 = 156
-NOTE_E3 = 165
-NOTE_F3 = 175
-NOTE_FS3 = 185
-NOTE_G3 = 196
-NOTE_GS3 = 208
-NOTE_A3 = 220
-NOTE_AS3 = 233
-NOTE_B3 = 247
-NOTE_C4 = 262
-NOTE_CS4 = 277
-NOTE_D4 = 294
-NOTE_DS4 = 311
-NOTE_E4 = 330
-NOTE_F4 = 349
-NOTE_FS4 = 370
-NOTE_G4 = 392
-NOTE_GS4 = 415
-NOTE_A4 = 440
-NOTE_AS4 = 466
-NOTE_B4 = 494
-NOTE_C5 = 523
-NOTE_CS5 = 554
-NOTE_D5 = 587
-NOTE_DS5 = 622
-NOTE_E5 = 659
-NOTE_F5 = 698
-NOTE_FS5 = 740
-NOTE_G5 = 784
-NOTE_GS5 = 831
-NOTE_A5 = 880
-NOTE_AS5 = 932
-NOTE_B5 = 988
-NOTE_C6 = 1047
-NOTE_CS6 = 1109
-NOTE_D6 = 1175
-NOTE_DS6 = 1245
-NOTE_E6 = 1319
-NOTE_F6 = 1397
-NOTE_FS6 = 1480
-NOTE_G6 = 1568
-NOTE_GS6 = 1661
-NOTE_A6 = 1760
-NOTE_AS6 = 1865
-NOTE_B6 = 1976
-NOTE_C7 = 2093
-NOTE_CS7 = 2217
-NOTE_D7 = 2349
-NOTE_DS7 = 2489
-NOTE_E7 = 2637
-NOTE_F7 = 2794
-NOTE_FS7 = 2960
-NOTE_G7 = 3136
-NOTE_GS7 = 3322
-NOTE_A7 = 3520
-NOTE_AS7 = 3729
-NOTE_B7 = 3951
-NOTE_C8 = 4186
-NOTE_CS8 = 4435
-NOTE_D8 = 4699
-NOTE_DS8 = 4978
-REST =0
-
+def get_board_port():
+    ports = list(serial.tools.list_ports.comports())
+    for p in ports:
+        if '1A86:7523' in str(p.hwid):
+            # print("name= " + str(p.name))
+            # print("description= " + str(p.description))
+            # print("location= " + str(p.location))
+            # print("device= " + str(p.device))
+            # print("interface= " + str(p.interface))
+            # print("product= " + str(p.product))
+            return(str(p.device))
 
 # instantiate and register the cmd handler
-board = Arduino("/dev/tty.usbserial-1430",baudrate=115200)
+board = Arduino(get_board_port(),baudrate=115200)
 
 iterator = util.Iterator(board)
 iterator.start()
 
 duration = 100
-frequency = 200 
+frequency = 200
 
-melody = (NOTE_E5, 4,  NOTE_B4,8,  NOTE_C5,8,  NOTE_D5,4,  NOTE_C5,8,  NOTE_B4,8,
-                        NOTE_A4, 4,  NOTE_A4,8,  NOTE_C5,8,  NOTE_E5,4,  NOTE_D5,8)
+melody_1= (REST, 2, NOTE_D4, 4,
+  NOTE_G4, -4, NOTE_AS4, 8, NOTE_A4, 4,
+  NOTE_G4, 2, NOTE_D5, 4)
 
-print(len(melody))
+melody_2= ( NOTE_CS4, 2, NOTE_AS4, 4)
 
-for i in range(0,len(melody),2):
-    frequency = melody[i]
-    duration = 15 * melody[i+1]  
-    board.send_sysex(SET_TONE, util.to_two_bytes(duration)+util.to_two_bytes(frequency) )
-    time.sleep(duration/1000)
+beat = 25
+
+
+def Play_melody(melody,beat):
+    for i in range(0,len(melody),2):
+        frequency = melody_1[i]
+        duration = beat * abs(melody[i+1])
+        if (frequency != REST):
+            board.send_sysex(SET_TONE, util.to_two_bytes(duration)+util.to_two_bytes(frequency) )
+        time.sleep(duration/1000)
+
+
+Play_melody(melody_1,25)
