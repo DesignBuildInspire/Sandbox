@@ -1,11 +1,18 @@
-import turtle
+from pynput import keyboard
+from pynput.keyboard import Key
 
-wn = turtle.Screen()
-wn.title("test")
-wn.bgcolor("black")
-wn.setup(width=800, height= 600)
-wn.tracer(0)
+def on_key_release(key):
+    if key == Key.right:
+        print("Right key clicked")
+    elif key == Key.left:
+        print("Left key clicked")
+    elif key == Key.up:
+        print("Up key clicked")
+    elif key == Key.down:
+        print("Down key clicked")
+    elif key == Key.esc:
+        exit()
 
-while True:
-    wn.update()
-    
+
+with keyboard.Listener(on_release=on_key_release) as listener:
+    listener.join()

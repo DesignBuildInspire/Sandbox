@@ -30,14 +30,10 @@ iterator.start()
 duration = 100
 frequency = 200
 
-melody_1= (REST, 2, NOTE_D4, 4,
-  NOTE_G4, -4, NOTE_AS4, 8, NOTE_A4, 4,
-  NOTE_G4, 2, NOTE_D5, 4)
-
+melody_1= (REST, 2, NOTE_D4, 4, NOTE_G4, -4, NOTE_AS4, 8, NOTE_A4, 4, NOTE_G4, 2, NOTE_D5, 4)
 melody_2= ( NOTE_CS4, 2, NOTE_AS4, 4)
 
 beat = 25
-
 
 def Play_melody(melody,beat):
     for i in range(0,len(melody),2):
@@ -48,4 +44,4 @@ def Play_melody(melody,beat):
         time.sleep(duration/1000)
 
 
-Play_melody(melody_1,25)
+Play_melody(melody_1,beat)
