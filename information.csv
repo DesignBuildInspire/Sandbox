@@ -1,0 +1,51 @@
+﻿ID,Name,alias,Capital,Population,Area,Median Household Income,tallest mountain,Highest Point,Neighboring States
+1,Alabama ,AL, Montgomery,"4,903,185"," 52,420 sq mi","$53,476 ", Cheaha Mountain,"2,413 ft (735 m)",4
+2,Alaska ,AK, Juneau,"731,158"," 663,300 sq mi","$77,653 ", Denali (Mount McKinley),"20,310 ft (6,194 m)",1
+3,Arizona ,AZ, Phoenix,"7,278,717"," 113,990 sq mi","$62,055 ", Humphreys Peak,"12,633 ft (3,851 m)",4
+4,Arkansas ,AR, Little Rock,"3,026,412"," 53,179 sq mi","$53,813 ", Magazine Mountain,"2,753 ft (839 m)",6
+5,California ,CA, Sacramento,"39,512,223"," 163,696 sq mi","$75,235 ", Mount Whitney,"14,505 ft (4,421 m)",3
+6,Colorado ,CO, Denver,"5,758,736"," 104,094 sq mi","$72,331 ", Mount Elbert,"14,440 ft (4,399 m)",6
+7,Connecticut ,CT, Hartford,"3,565,287"," 5,543 sq mi","$78,444 ", Bear Mountain,"2,316 ft (706 m)",5
+8,Delaware ,DE, Dover,"973,764"," 1,949 sq mi","$68,287 ", Ebright Azimuth,447 ft (136 m),4
+9,Florida ,FL, Tallahassee,"21,477,737"," 65,757 sq mi","$58,763 ", Britton Hill,345 ft (105 m),2
+10,Georgia ,GA, Atlanta,"10,617,423"," 59,425 sq mi","$62,199 ", Brasstown Bald,"4,784 ft (1,458 m)",5
+11,Hawaii ,HI, Honolulu,"1,415,872"," 10,932 sq mi","$81,275 ", Mauna Kea,"13,796 ft (4,205 m)",0
+12,Idaho ,ID, Boise,"1,787,065"," 83,569 sq mi","$60,999 ", Borah Peak,"12,662 ft (3,859 m)",6
+13,Illinois ,IL, Springfield,"12,671,821"," 57,914 sq mi","$70,196 ", Charles Mound,"1,235 ft (376 m)",5
+14,Indiana ,IN, Indianapolis,"6,732,219"," 36,418 sq mi","$60,277 ", Hoosier Hill,"1,257 ft (383 m)",4
+15,Iowa ,IA, Des Moines,"3,155,070"," 56,273 sq mi","$63,488 ", Hawkeye Point,"1,670 ft (509 m)",6
+16,Kansas ,KS, Topeka,"2,913,314"," 82,278 sq mi","$62,087 ", Mount Sunflower,"4,039 ft (1,231 m)",6
+17,Kentucky ,KY, Frankfort,"4,467,673"," 40,409 sq mi","$56,608 ", Black Mountain,"4,145 ft (1,263 m)",7
+18,Louisiana ,LA, Baton Rouge,"4,648,794"," 52,378 sq mi","$50,931 ", Driskill Mountain,535 ft (163 m),4
+19,Maine ,ME, Augusta,"1,344,212"," 35,385 sq mi","$59,341 ", Mount Katahdin,"5,269 ft (1,606 m)",1
+20,Maryland ,MD, Annapolis,"6,045,680"," 12,406 sq mi","$83,242 ", Backbone Mountain,"3,360 ft (1,024 m)",5
+21,Massachusetts ,MA, Boston,"6,892,503"," 10,554 sq mi","$85,843 ", Mount Greylock,"3,489 ft (1,063 m)",5
+22,Michigan ,MI, Lansing,"10,077,331"," 96,716 sq mi","$62,843 ", Mount Arvon,"1,979 ft (603 m)",4
+23,Minnesota ,MN, St. Paul,"5,639,632"," 86,936 sq mi","$74,593 ", Eagle Mountain,"2,301 ft (701 m)",4
+24,Mississippi ,MS, Jackson,"2,976,149"," 48,430 sq mi","$47,781 ", Woodall Mountain,807 ft (246 m),4
+25,Missouri ,MO, Jefferson City,"6,137,428"," 69,704 sq mi","$59,196 ", Taum Sauk Mountain,"1,772 ft (540 m)",8
+26,Montana ,MT, Helena,"1,068,778"," 147,040 sq mi","$60,557 ", Granite Peak,"12,799 ft (3,901 m)",6
+27,Nebraska ,NE, Lincoln,"1,934,408"," 77,354 sq mi","$64,855 ", Panorama Point,"5,429 ft (1,655 m)",6
+28,Nevada ,NV, Carson City,"3,155,070"," 110,567 sq mi","$60,365 ", Boundary Peak,"13,147 ft (4,013 m)",4
+29,New Hampshire ,NH, Concord,"1,359,711"," 9,349 sq mi","$76,768 ", Mount Washington,"6,288 ft (1,917 m)",3
+30,New Jersey ,NJ, Trenton,"8,882,190"," 8,721 sq mi","$85,751 ", High Point,"1,803 ft (550 m)",3
+31,New Mexico ,NM, Santa Fe,"2,096,829"," 113,990 sq mi","$51,945 ", Wheeler Peak,"13,167 ft (4,013 m)",5
+32,New York ,NY, Albany,"19,453,561"," 54,555 sq mi","$70,113 ", Mount Marcy,"5,344 ft (1,629 m)",6
+33,North Carolina ,NC, Raleigh,"10,439,388"," 53,819 sq mi","$57,341 ", Mount Mitchell,"6,684 ft (2,037 m)",4
+34,North Dakota ,ND, Bismarck,"762,062"," 70,698 sq mi","$64,577 ", White Butte,"3,506 ft (1,069 m)",4
+35,Ohio ,OH, Columbus,"11,689,100"," 44,825 sq mi","$59,625 ", Campbell Hill,"1,550 ft (472 m)",6
+36,Oklahoma ,OK, Oklahoma City,"3,956,971"," 69,899 sq mi","$56,299 ", Black Mesa,"4,973 ft (1,516 m)",6
+37,Oregon ,OR, Salem,"4,217,737"," 98,381 sq mi","$66,697 ", Mount Hood,"11,250 ft (3,429 m)",6
+38,Pennsylvania ,PA, Harrisburg,"12,801,989"," 46,054 sq mi","$66,820 ", Mount Davis,"3,213 ft (979 m)",6
+39,Rhode Island ,RI, Providence,"1,059,361"," 1,034 sq mi","$70,303 ", Jerimoth Hill,812 ft (247 m),4
+40,South Carolina ,SC, Columbia,"5,148,714"," 32,020 sq mi","$56,227 ", Sassafras Mountain,"3,560 ft (1,085 m)",4
+41,South Dakota ,SD, Pierre,"884,659"," 77,116 sq mi","$59,533 ", Harney Peak,"7,242 ft (2,207 m)",6
+42,Tennessee ,TN, Nashville,"6,829,174"," 42,144 sq mi","$58,643 ", Clingmans Dome,"6,643 ft (2,025 m)",8
+43,Texas ,TX, Austin,"28,995,881"," 268,596 sq mi","$64,034 ", Guadalupe Peak,"8,751 ft (2,667 m)",4
+44,Utah ,UT, Salt Lake City,"3,205,958"," 84,897 sq mi","$68,358 ", Kings Peak,"13,534 ft (4,124 m)",6
+45,Vermont ,VT, Montpelier,"623,989"," 9,616 sq mi","$69,395 ", Mount Mansfield,"4,393 ft (1,339 m)",3
+46,Virginia ,VA, Richmond,"8,535,519"," 42,774 sq mi","$74,222 ", Mount Rogers,"5,729 ft (1,746 m)",5
+47,Washington ,WA, Olympia,"7,705,281"," 71,362 sq mi","$70,979 ", Mount Rainier,"14,411 ft (4,392 m)",4
+48,West Virginia ,WV, Charleston,"1,792,147"," 24,230 sq mi","$48,850 ", Spruce Knob,"4,863 ft (1,482 m)",5
+49,Wisconsin ,WI, Madison,"5,822,434"," 65,496 sq mi","$65,029 ", Timms Hill,"1,951 ft (595 m)",4
+50,Wyoming ,WY, Cheyenne,"578,759"," 97,813 sq mi","$62,268 ", Gannett Peak,"13,809 ft (4,209 m)",6

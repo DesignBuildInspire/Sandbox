@@ -1,10 +1,15 @@
+import serial.tools.list_ports
 from pyfirmata import Arduino, util, Board, SERVO, PWM
-from pyfirmata import ANALOG, I2C_REQUEST, INPUT
 from pyfirmata.boards import BOARDS
 import time
 
+def get_board_port():
+    ports = list(serial.tools.list_ports.comports())
+    for p in ports:
+        if '1A86:7523' in str(p.hwid):
+            return(str(p.device))
 
-mbot = Arduino("/dev/tty.usbserial-1430",baudrate=115200)
+mbot = Arduino(get_board_port(),baudrate=115200)
 
 iterator = util.Iterator(mbot)
 iterator.start()
@@ -24,6 +29,16 @@ servo3 = mbot.digital[15]
 servo3.mode = SERVO
 servo3.write(90)
 
+while True:
+    servo1.write(0)
+    time.sleep(0.5)
+    servo2.write(0)
+    time.sleep(0.5)
+    servo1.write(180)
+    time.sleep(0.5)
+    servo2.write(180)
+    time.sleep(0.5)
+
 
 # servo3.write(180)
 # time.sleep(4)
@@ -31,10 +46,7 @@ servo3.write(90)
 # time.sleep(1)
 # servo3.write(90)
 
-# servo1.write(90)
-for i in range (0,120,10):
-    time.sleep(0.04)
-    servo1.write(i)
+# servo1.write(90
 
 # servo2.write(90)
 # time.sleep(1)
