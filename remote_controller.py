@@ -22,24 +22,33 @@ iterator = util.Iterator(mbot)
 iterator.start()
 
 def on_key_release(key):
-    if key == Key.right:
-        print("Right key clicked")
-        MoveMotor(RIGHT, 0.5,1)
+    try:
+        if key.char == 'd':
+            move_arm(80)
+        if key.char == 'u':
+            move_arm(100)
+    except AttributeError:
+        if key == Key.right:
+            print("Right key clicked")
+            MoveMotor(RIGHT, 0.5,1)
+        elif key == Key.left:
+            print("Left key clicked")
+            MoveMotor(LEFT, 0.5,1)
+        elif key == Key.up:
+            print("Up key clicked")
+            MoveMotor(FORWARD, 0.5,1)
+        elif key == Key.down:
+            print("Down key clicked")
+            MoveMotor(BACKWARD, 0.5,1)
 
-    elif key == Key.left:
-        print("Left key clicked")
-        MoveMotor(LEFT, 0.5,1)
+        elif key == Key.esc:
+            exit()
+        
+def move_arm(angle=90):
+    servo = mbot.digital[11] # can be 11 or 12 , we can try both.
+    servo.mode = SERVO
+    servo.write(angle)
 
-    elif key == Key.up:
-        print("Up key clicked")
-        MoveMotor(FORWARD, 0.5,1)
-
-    elif key == Key.down:
-        print("Down key clicked")
-        MoveMotor(BACKWARD, 0.5,1)
-
-    elif key == Key.esc:
-        exit()
 
 def MoveMotor(direction,speed=0.5,duration=1):
     
@@ -68,13 +77,7 @@ def MoveMotor(direction,speed=0.5,duration=1):
     time.sleep(duration)
     motor1_pwm.write(0)
     motor2_pwm.write(0)
-
-MoveMotor(FORWARD, 0.5,1)
-    
-
-
-
-
+       
 
 with keyboard.Listener(on_release=on_key_release) as listener:
     listener.join()
