@@ -2,7 +2,7 @@ from pyfirmata import Arduino, util, Board, SERVO
 from pyfirmata import PWM, ANALOG, I2C_REQUEST
 from pyfirmata.boards import BOARDS
 import serial.tools.list_ports
-from notes import *
+from mBot.notes import *
 
 import time
 

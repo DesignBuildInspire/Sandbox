@@ -76,8 +76,7 @@ def MoveMotor(direction,speed=0.5,duration=1):
     motor2_pwm.write(speed)
     time.sleep(duration)
     motor1_pwm.write(0)
-    motor2_pwm.write(0)
-       
+    motor2_pwm.write(0) 
 
 with keyboard.Listener(on_release=on_key_release) as listener:
     listener.join()
