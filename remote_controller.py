@@ -1,83 +1,65 @@
-import serial.tools.list_ports
-from pyfirmata import Arduino, util, Board, SERVO, PWM
-from pyfirmata.boards import BOARDS
-import time
+from mBot.notes import *
+from mBot.init import *
+from mBot.mbot_motion import *
+from mBot.mbot_soundlight import *
+from mBot.mbot_sensors import *
 from pynput import keyboard
 from pynput.keyboard import Key
 
-FORWARD = 0
-BACKWARD = 1
-LEFT = 2
-RIGHT =3
-
-def get_mbot_port():
-    ports = list(serial.tools.list_ports.comports())
-    for p in ports:
-        if '1A86:7523' in str(p.hwid):
-            return(str(p.device))
-
-mbot = Arduino(get_mbot_port(),baudrate=115200)
-
-iterator = util.Iterator(mbot)
-iterator.start()
+mbot= init_mbot()
+initMotor(mbot)
 
 def on_key_release(key):
     try:
         if key.char == 'd':
-            move_arm(80)
+            move_arm(mbot,80)
         if key.char == 'u':
-            move_arm(100)
+            move_arm(mbot,100)
     except AttributeError:
         if key == Key.right:
-            print("Right key clicked")
-            MoveMotor(RIGHT, 0.5,1)
+            print("Right key release")
+            stopMove(mbot,RIGHT)
         elif key == Key.left:
-            print("Left key clicked")
-            MoveMotor(LEFT, 0.5,1)
+            print("Left key release")
+            stopMove(mbot,LEFT)
         elif key == Key.up:
-            print("Up key clicked")
-            MoveMotor(FORWARD, 0.5,1)
+            print("Up key release")
+            stopMove(mbot,FORWARD)
         elif key == Key.down:
-            print("Down key clicked")
-            MoveMotor(BACKWARD, 0.5,1)
+            print("Down key release")
+            stopMove(mbot,BACKWARD)
 
         elif key == Key.esc:
             exit()
-        
-def move_arm(angle=90):
-    servo = mbot.digital[11] # can be 11 or 12 , we can try both.
-    servo.mode = SERVO
-    servo.write(angle)
+
+def on_key_press(key):
+    try:
+        if key.char == 'd':
+            move_arm(mbot,80)
+        if key.char == 'u':
+            move_arm(mbot,100)
+        if key.char == 'm':
+            play_sound(mbot,500,NOTE_A5)
+    except AttributeError:
+        if key == Key.right:
+            print("Right key press")
+            startMove(mbot,RIGHT, 0.5)
+        elif key == Key.left:
+            print("Left key press")
+            startMove(mbot,LEFT, 0.5)
+        elif key == Key.up:
+            print("Up key press")
+            startMove(mbot,FORWARD, 0.5)
+        elif key == Key.down:
+            print("Down key press")
+            startMove(mbot,BACKWARD, 0.5)
+
+        elif key == Key.esc:
+            exit()     
 
 
-def MoveMotor(direction,speed=0.5,duration=1):
-    
-    if(direction==FORWARD):
-        mbot.digital[7].write(0)
-        mbot.digital[4].write(1)
-    elif(direction==BACKWARD):
-        mbot.digital[7].write(1)
-        mbot.digital[4].write(0)
-    elif(direction==LEFT):
-        mbot.digital[7].write(1)
-        mbot.digital[4].write(1)
-    elif(direction==RIGHT):
-        mbot.digital[7].write(0)
-        mbot.digital[4].write(0)
-    else:
-        print("wrong direction")
-
-    motor1_pwm = mbot.digital[5]
-    motor1_pwm.mode = PWM
-    motor2_pwm = mbot.digital[6]
-    motor2_pwm.mode = PWM
-
-    motor1_pwm.write(speed)
-    motor2_pwm.write(speed)
-    time.sleep(duration)
-    motor1_pwm.write(0)
-    motor2_pwm.write(0) 
-
-with keyboard.Listener(on_release=on_key_release) as listener:
+with keyboard.Listener(on_press=on_key_press,on_release=on_key_release) as listener:
     listener.join()
     
+# with keyboard.Listener(on_release=on_key_release) as listener:
+#     listener.join()

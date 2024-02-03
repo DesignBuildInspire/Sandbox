@@ -50,11 +50,11 @@ while True:
     board.digital[id_p[0]].write(1)
     board.digital[id_p[1]].write(0)
     print_7seg(board,numbers[5])
-    time.sleep(.005)
+    time.sleep(.5)
     board.digital[id_p[0]].write(0)
     board.digital[id_p[1]].write(1)
     print_7seg(board,numbers[6])
-    time.sleep(.005)
+    time.sleep(.5)
 
 # for i in range (10):
 #     print_7seg(board, numbers[i])
