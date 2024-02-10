@@ -12,9 +12,9 @@ initMotor(mbot)
 def on_key_release(key):
     try:
         if key.char == 'd':
-            move_arm(mbot,80)
+            move_arm(mbot,11,80)
         if key.char == 'u':
-            move_arm(mbot,100)
+            move_arm(mbot,11,100)
     except AttributeError:
         if key == Key.right:
             print("Right key release")
@@ -35,9 +35,9 @@ def on_key_release(key):
 def on_key_press(key):
     try:
         if key.char == 'd':
-            move_arm(mbot,80)
+            move_arm(mbot,11,80)
         if key.char == 'u':
-            move_arm(mbot,100)
+            move_arm(mbot,11,100)
         if key.char == 'm':
             play_sound(mbot,500,NOTE_A5)
     except AttributeError:
