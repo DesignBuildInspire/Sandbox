@@ -11,7 +11,7 @@ id_p = (2,15)
 col=[]
 row=[]
 
-print (map_p.__sizeof__())
+# print (map_p.__sizeof__())
 
 def get_mbot_port():
     ports = list(serial.tools.list_ports.comports())
@@ -25,6 +25,8 @@ board = Arduino(get_mbot_port(),baudrate=115200)
 iterator = util.Iterator(board)
 iterator.start()
 
+
+
 for i in range(0,4):
     col.append(board.digital[map_p[i]])
 
@@ -37,6 +39,7 @@ for i in range(0,4):
     row[i].mode = OUTPUT
     row[i].write(0)  
     
+
 def set_point (x,y):
     for i in range(0,4):
         if (i==x):
@@ -60,7 +63,15 @@ def clear_point (x,y):
         row[y].write(0)
       
       
-for i in range (4):
-    for j in range(4):
-        set_point(i,j)
-        time.sleep(0.25)
+# for i in range (4):
+#     for j in range(4):
+#         set_point(i,j)
+#         time.sleep(0.25)
+
+while True:
+    set_point(0,0)
+    time.sleep(0.05)
+    clear_point(0,0)
+    set_point(1,1)
+    clear_point(1,1)
+    time.sleep(1,1)
