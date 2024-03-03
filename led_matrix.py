@@ -74,4 +74,4 @@ while True:
     clear_point(0,0)
     set_point(1,1)
     clear_point(1,1)
-    time.sleep(1,1)
+    time.sleep(0.05)
