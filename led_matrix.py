@@ -70,8 +70,8 @@ def clear_point (x,y):
 
 while True:
     set_point(0,0)
-    time.sleep(0.05)
-    clear_point(0,0)
+    time.sleep(1)
+    clear_all()
     set_point(1,1)
-    clear_point(1,1)
-    time.sleep(0.05)
+    clear_all()
+    time.sleep(1)
