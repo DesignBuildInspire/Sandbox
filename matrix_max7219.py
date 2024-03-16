@@ -54,20 +54,20 @@ def push_byte(byte):
         #print((int) ((byte & (1 << bit)) != 0))
         # # Toggle the clock
         Clk.write(1)
-        time.sleep(0.01)  # Adjust the delay as needed
+        time.sleep(0.001)  # Adjust the delay as needed
         Clk.write(0)
 
 
 def setCommand(register, data):
     CS_o.write(1)
-    time.sleep(0.01) 
+    time.sleep(0.001) 
     CS_o.write(0)
-    time.sleep(0.01) 
+    time.sleep(0.001) 
     push_byte(register)
     push_byte(data)
     # Deselect the slave (SS)
     CS_o.write(1)
-    time.sleep(0.01) 
+    time.sleep(0.001) 
 
 
 
@@ -92,9 +92,11 @@ time.sleep(0.1)
 for i in range(0,8):
     setCommand(i+1,0)
 
-setCommand(2,0b01111110)
-setCommand(3,0b01111110)
+setCommand(1,0b00000000)
+setCommand(2,0b00000000)
+setCommand(3,0b01100110)
 setCommand(4,0b01100110)
-setCommand(5,0b01100110)   
-setCommand(6,0b01111110)
-setCommand(7,0b01111110)
+setCommand(5,0b00000000)   
+setCommand(6,0b10000001)
+setCommand(7,0b01100110)
+setCommand(8,0b00011000)
