@@ -46,6 +46,8 @@ D_in.write(0)
 CS_o.write(1)
 Clk.write(0)
 
+delay_t = 0.0001
+
 def push_byte(byte):
     
     for bit in range(7, -1, -1):
@@ -54,8 +56,9 @@ def push_byte(byte):
         #print((int) ((byte & (1 << bit)) != 0))
         # # Toggle the clock
         Clk.write(1)
-        time.sleep(0.001)  # Adjust the delay as needed
+        time.sleep(delay_t)  # Adjust the delay as needed
         Clk.write(0)
+        time.sleep(delay_t)  # Adjust the delay as needed
 
 
 def setCommand(register, data):
@@ -64,12 +67,27 @@ def setCommand(register, data):
     CS_o.write(0)
     time.sleep(0.001) 
     push_byte(register)
+    time.sleep(0.001) 
     push_byte(data)
-    # Deselect the slave (SS)
+    time.sleep(0.001) 
+    CS_o.write(1)
+    time.sleep(0.01) 
+
+def setCommand_2x(register, data1, data2):
     CS_o.write(1)
     time.sleep(0.001) 
-
-
+    CS_o.write(0)
+    time.sleep(0.001) 
+    push_byte(register)
+    time.sleep(0.001) 
+    push_byte(data1)
+    time.sleep(0.001) 
+    push_byte(register)
+    time.sleep(0.001) 
+    push_byte(data2)
+    time.sleep(0.001) 
+    CS_o.write(1)
+    time.sleep(0.01) 
 
 
 # Byte to transmit
@@ -79,24 +97,41 @@ data_byte = 0x0A01  # Replace with the actual byte you want to transmit
 
 # Transmit the byte over SPI
 setCommand(max7219_reg_scanLimit, 0x07)   
-time.sleep(0.1)   
+time.sleep(0.01)   
 setCommand(max7219_reg_decodeMode, 0x00)
-time.sleep(0.1)   
+time.sleep(0.01)   
 setCommand(max7219_reg_shutdown, 0x01)
-time.sleep(0.1)   
+time.sleep(0.01)   
 setCommand(max7219_reg_displayTest, 0x00)
-time.sleep(0.1)   
-setCommand(max7219_reg_intensity, 0x0f)
-time.sleep(0.1)   
+time.sleep(0.01)   
+setCommand(max7219_reg_intensity, 0x05)
+time.sleep(0.01)   
 
 for i in range(0,8):
     setCommand(i+1,0)
+    
+# dot = 0b00000011 
+# for i in range(1,7):
+#     dot = dot * 2
+#     setCommand(1,0b00000000)
+#     setCommand(2,0b00000000)
+#     setCommand(3,0b00000000)
+#     setCommand(4,dot)
+#     setCommand(5,dot)
+#     setCommand(6,0b00000000)   
+#     setCommand(7,0b00000000)
+#     setCommand(8,0b00000000)
+#     time.sleep(0.5)
 
-setCommand(1,0b00000000)
-setCommand(2,0b00000000)
-setCommand(3,0b01100110)
-setCommand(4,0b01100110)
-setCommand(5,0b00000000)   
-setCommand(6,0b10000001)
-setCommand(7,0b01100110)
-setCommand(8,0b00011000)
+
+
+
+setCommand_2x(1,0b01100110,0b01100110)
+setCommand_2x(2,0b01100110,0b01100110)
+setCommand_2x(3,0b00000000,0b00000000)
+setCommand_2x(4,0b00011000,0b00011000)
+setCommand_2x(5,0b00011000,0b00011000)   
+setCommand_2x(6,0b10000001,0b00011000)
+setCommand_2x(7,0b01000010,0b01000010)
+setCommand_2x(8,0b00011000,0b10000001)
+
