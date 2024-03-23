@@ -92,12 +92,7 @@ def setCommand_2x(register, data1, data2):
     CS_o.write(1)
     time.sleep(0.01) 
     
-data = [0,0,0,16,0,0,0,0]
 
-
-def display_screen(data):
-    for i in range (0,8):
-        setCommand(i+1,data[i])
 
 
 # Byte to transmit
@@ -120,7 +115,16 @@ time.sleep(0.01)
 for i in range(0,8):
     setCommand(i+1,0)
     
+    
+data = [0,0,0,16,0,0,0,0]
 
+
+def display_screen(data):
+    for i in range (0,8):
+        setCommand(i+1,data[i])
+
+
+display_screen(data)
 
 
 def on_key_press(key):
