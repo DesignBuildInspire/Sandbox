@@ -122,25 +122,60 @@ data = [0,0,0,16,0,0,0,0]
 def display_screen(data):
     for i in range (0,8):
         setCommand(i+1,data[i])
+        
+def list_x2(data):
+    out=[]
+    for i in range(len(data)):
+        out.append(int(data[i]*2))
+    return out
+
+def list_dev2(data):
+    out=[]
+    for i in range(len(data)):
+        out.append(int(data[i]/2))
+    return out
+
+def move_right(data):
+    out=data
+    out.insert(0,0)
+    return out[0:8]
+
+def move_left(data):
+    out=data
+    out.extend([0])
+    return out[1:9]
+
 
 
 display_screen(data)
 
 
 def on_key_press(key):
+    global data
     try:
         if key.char == 'd':
             return
     except AttributeError:
         if key == Key.right:
             print("Right key press")
+            data = list_x2(data)
+            display_screen(data)
+
         elif key == Key.left:
             print("Left key press")
+            data = list_dev2(data)
+            display_screen(data)
+
         elif key == Key.up:
             print("Up key press")
+            data = move_right(data)
+            display_screen(data)
+            
         elif key == Key.down:
             print("Down key press")
-
+            data = move_left(data)
+            display_screen(data)
+            
         elif key == Key.esc:
             exit()     
 
