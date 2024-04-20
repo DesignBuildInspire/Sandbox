@@ -43,6 +43,7 @@
 #define I2C_REGISTER_NOT_SPECIFIED  -1
 #define PING_READ                   0x75
 #define SET_TONE                    0x74
+#define SET_SPI                     0x73
 
 
 
@@ -698,65 +699,16 @@ void sysexCallback(byte command, byte argc, byte *argv)
       break;
 
     case SERIAL_MESSAGE:
-#ifdef FIRMATA_SERIAL_FEATURE
-      serialFeature.handleSysex(command, argc, argv);
-#endif
+  #ifdef FIRMATA_SERIAL_FEATURE
+        serialFeature.handleSysex(command, argc, argv);
+  #endif
       break;
     case PING_READ: {
-      // byte pulseDurationArray[4] = {
-      //   (argv[2] & 0x7F) | ((argv[3] & 0x7F) << 7),
-      //   (argv[4] & 0x7F) | ((argv[5] & 0x7F) << 7),
-      //   (argv[6] & 0x7F) | ((argv[7] & 0x7F) << 7),
-      //   (argv[8] & 0x7F) | ((argv[9] & 0x7F) << 7)
-      // };
-      // unsigned long pulseDuration = ((unsigned long)pulseDurationArray[0] << 24)
-      //         + ((unsigned long)pulseDurationArray[1] << 16)
-      //         + ((unsigned long)pulseDurationArray[2] << 8)
-      //         + ((unsigned long)pulseDurationArray[3]);
-      // if (argv[1] == HIGH){
-      //   pinMode(argv[0],OUTPUT);
-      //   digitalWrite(argv[0],LOW);
-      //   delayMicroseconds(2);
-      //   digitalWrite(argv[0],HIGH);
-      //   delayMicroseconds(pulseDuration);
-      //   digitalWrite(argv[0],LOW);
-      // } else {
-      //   digitalWrite(argv[0],HIGH);
-      //   delayMicroseconds(2);
-      //   digitalWrite(argv[0],LOW);
-      //   delayMicroseconds(pulseDuration);
-      //   digitalWrite(argv[0],HIGH);
-      // }
-      // unsigned long duration;
-      // byte responseArray[5];
-      // byte timeoutArray[4] = {
-      //     (argv[10] & 0x7F) | ((argv[11] & 0x7F) << 7),
-      //     (argv[12] & 0x7F) | ((argv[13] & 0x7F) << 7),
-      //     (argv[14] & 0x7F) | ((argv[15] & 0x7F) << 7),
-      //     (argv[16] & 0x7F) | ((argv[17] & 0x7F) << 7)
-      // };
-      // unsigned long timeout = ((unsigned long)timeoutArray[0] << 24) +
-      //                         ((unsigned long)timeoutArray[1] << 16) +
-      //                         ((unsigned long)timeoutArray[2] << 8) +
-      //                         ((unsigned long)timeoutArray[3]);
 
-      // pinMode(argv[0],INPUT);
-      // duration = pulseIn(argv[0], argv[1],timeout);
-      // responseArray[0] = argv[0];
-      // responseArray[1] = (((unsigned long)duration >> 24) & 0xFF);
-      // responseArray[2] = (((unsigned long)duration >> 16) & 0xFF);
-      // responseArray[3] = (((unsigned long)duration >> 8) & 0xFF);
-      // responseArray[4] = (((unsigned long)duration & 0xFF));
       long duration = 0;
       int distance = 0;
-      // const int trigPin = 9;
-      // const int echoPin = 10;
 
       const int sigPin = A3;
-
-      // const int LED = 13;
-      // pinMode(LED, OUTPUT); // Sets the trigPin as an Output
-      // digitalWrite(LED, HIGH);
 
       pinMode(sigPin, OUTPUT); // Sets the trigPin as an Output
 
@@ -784,35 +736,81 @@ void sysexCallback(byte command, byte argc, byte *argv)
 
       break;
     }
-      case SET_TONE:
-        int duration =0;
-        int frequency = 0;
+    case SET_TONE:{
+      int duration =0;
+      int frequency = 0;
 
-        if (argc > 3) 
-          {
-            duration = argv[0] + (argv[1] << 7);
-            frequency = argv[2] + (argv[3] << 7);
-          }
-          else 
-          {
-            duration = 0.25 * 1000;
-            frequency = 262;
-          }
-        int buzzer_pin =8;
-        // int frequency = 262;
-        // int duration = 0.25 * 1000;
-        int period = 1000000L / frequency;
-        int pulse = period / 2;
-        pinMode(buzzer_pin, OUTPUT);
-        for (long i = 0; i < duration * 1000L; i += period) 
+      if (argc > 3) 
         {
-          digitalWrite(buzzer_pin, HIGH);
-          delayMicroseconds(pulse);
-          digitalWrite(buzzer_pin, LOW);
-          delayMicroseconds(pulse);
-          wdt_reset();
+          duration = argv[0] + (argv[1] << 7);
+          frequency = argv[2] + (argv[3] << 7);
         }
-    break;
+        else 
+        {
+          duration = 0.25 * 1000;
+          frequency = 262;
+        }
+      int buzzer_pin =8;
+      // int frequency = 262;
+      // int duration = 0.25 * 1000;
+      int period = 1000000L / frequency;
+      int pulse = period / 2;
+      pinMode(buzzer_pin, OUTPUT);
+      for (long i = 0; i < duration * 1000L; i += period) 
+      {
+        digitalWrite(buzzer_pin, HIGH);
+        delayMicroseconds(pulse);
+        digitalWrite(buzzer_pin, LOW);
+        delayMicroseconds(pulse);
+        wdt_reset();
+      }
+      break;
+    }
+    case SET_SPI:{
+
+      // pinMode(13, OUTPUT);
+      // digitalWrite(13, HIGH);
+      // delay(500);
+      // digitalWrite(13, LOW);
+
+      // pinMode(A0, OUTPUT); // A0 CS
+      pinMode(A1, OUTPUT); // A1 Din_PIN
+      pinMode(A4, OUTPUT); // A2 CKK_PIN
+
+      // digitalWrite(A0, HIGH);
+
+      int data_in = 0;
+      data_in = argv[0] + (argv[1] << 7);
+
+      // digitalWrite(A0, LOW);
+      digitalWrite(A1, LOW);
+      digitalWrite(A4, LOW);
+
+
+    for (int i = 7; i >= 0; i--) {
+
+        // Extract the i-th bit of data
+        uint8_t bit = (data_in >> i) & 0x01;
+                
+        // Set the data pin accordingly
+        digitalWrite(A1, bit);
+        
+        // Toggle the clock pin to signal data transmission
+        digitalWrite(A4, HIGH);
+
+        delayMicroseconds(10); // Adjust as needed
+        digitalWrite(A4, LOW);
+
+        delayMicroseconds(10); // Adjust as needed
+        
+        // Add a small delay (adjust as needed for your application)
+    }
+      delayMicroseconds(10);
+      // digitalWrite(A0, HIGH);
+      // digitalWrite(13, LOW);
+      break;
+      }
+
   }
 }
 
@@ -890,6 +888,9 @@ void setup()
   // Serial1.begin(57600);
   // Firmata.begin(Serial1);
   // However do not do this if you are using SERIAL_MESSAGE
+
+
+
 
   Firmata.begin(115200);
   while (!Serial) {
