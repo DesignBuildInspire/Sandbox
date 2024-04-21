@@ -62,7 +62,6 @@ def push_byte(byte):
 
 
 def setCommand(register, data):
-    CS_o.write(1)
     time.sleep(0.001) 
     CS_o.write(0)
     time.sleep(0.001) 
