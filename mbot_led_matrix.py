@@ -107,8 +107,9 @@ time.sleep(0.1)
 
 for i in range(1,9):
     setCommand_2(i,0,0)
+    time.sleep(0.01)
 
-setCommand_2(1,1,1)
+setCommand_2(1,1,2)
 
 
 # dot = 0b00000011 
