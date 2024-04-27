@@ -74,6 +74,8 @@ def setCommand(register, data):
     CS_out.write(0)
     push_Byte(register)
     push_Byte(data)
+    CS_out.write(1)
+
     
 
 def setCommand_2(register, data1, data2):
@@ -109,7 +111,7 @@ for i in range(1,9):
     setCommand_2(i,0,0)
     time.sleep(0.01)
 
-setCommand_2(1,1,2)
+setCommand_2(1,1,255)
 
 
 # dot = 0b00000011 
