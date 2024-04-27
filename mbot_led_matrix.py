@@ -111,17 +111,28 @@ for i in range(1,9):
     setCommand_2(i,0,0)
     time.sleep(0.01)
 
-eye = [0b00110011, 
+eye = [[0b00110011, 
        0b00001100, 
        0b00110000, 
        0b00011000, 
        0b00001100, 
        0b00000110, 
        0b00011000,  
-       0b01100000]
+       0b01100000],
 
-for i in range (1,len(eye)):
-    setCommand(i,eye[i])
+       [0b00110011, 
+       0b00001100, 
+       0b00110000, 
+       0b00000000, 
+       0b00000000, 
+       0b00000110, 
+       0b00011000,  
+       0b01100000]]
+
+for j in range (1,2):
+    for i in range (1,8):
+        setCommand(i,eye[j][i])
+    time.sleep(0.1)
 
 
 # dot = 0b00000011 
