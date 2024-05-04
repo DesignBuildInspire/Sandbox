@@ -5,9 +5,28 @@ from mBot.mbot_soundlight import *
 from mBot.mbot_sensors import *
 from pynput import keyboard
 from pynput.keyboard import Key
+from mBot.ledMatrix import *
 
 mbot= init_mbot()
 initMotor(mbot)
+init_LED(mbot)
+
+# Transmit the byte over SPI
+setCommand_2(mbot,max7219_reg_scanLimit, 0x07, 0x07)   
+time.sleep(0.1)   
+setCommand_2(mbot,max7219_reg_decodeMode, 0x00, 0x00)
+time.sleep(0.1)   
+setCommand_2(mbot,max7219_reg_shutdown, 0x01, 0x01)
+time.sleep(0.1)   
+setCommand_2(mbot,max7219_reg_displayTest, 0x00, 0x00)
+time.sleep(0.1)   
+setCommand_2(mbot,max7219_reg_intensity, 0x01, 0x01)
+time.sleep(0.1)   
+
+for i in range(1,9):
+    setCommand_2(mbot,i,0,0)
+    time.sleep(0.01)
+
 
 def on_key_release(key):
     try:
